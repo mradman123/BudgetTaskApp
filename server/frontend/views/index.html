@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="app">
+
+<head>
+    <title>App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+
+    <!-- load bootstrap and fontawesome via CDN -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href=".././css/datatables.bootstrap.min.css">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <!-- Angular datetimepicker style sheet -->
+    <link rel="stylesheet" href=".././css/material-datetimepicker.min.css">
+    <style>
+        html,
+        body,
+        input,
+        select,
+        textarea {
+            font-size: 1.05em !important;
+        }
+    </style>
+<!--     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtYxwx4CAz9k1e7yfhzj5jJwFvk2YC1wU&libraries=places&language=en"></script>
+-->    <!-- jquery -->
+    <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src=".././scripts/datatables.min.js"></script>
+    <!-- moment library -->
+    <script src=".././scripts/moment.min.js"></script>       
+    <!-- load angular via CDN -->
+    <script src="//code.angularjs.org/1.6.4/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.6.4/angular-route.min.js"></script>
+    <script src="//code.angularjs.org/1.6.4/angular-resource.min.js"></script>
+    <script src=".././scripts/angular-datatables.min.js"></script>   
+    <script src=".././scripts/angular-datatables.bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <!-- Angular datetimepicker Library -->
+    <script src=".././scripts/angular-material-datetimepicker.min.js"></script
+    <!-- app scripts -->
+    <script src=".././app.js"></script>
+    <script src=".././routes.js"></script>
+    <!-- SERVICES -->
+    <script src=".././services/userStorage.js"></script>
+    <script src=".././services/getData.js"></script>
+    <script src=".././services/handleTasks.js"></script>
+    <!-- CONTROLLERS-->
+    <script src=".././controllers/loginControllers.js"></script>
+    <script src=".././controllers/tasksControllers.js"></script>
+    <!-- DIRECTIVES -->
+    <script src=".././directives.js"></script>
+    <script src=".././directives/taskDirective.js"></script>
+</head>
+
+<body ng-view>
+
+
+
+</body>
+
+</html>
