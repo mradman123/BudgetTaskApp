@@ -13,7 +13,8 @@ app.config(function ($routeProvider){
             controller: 'logoutController'    
         })
         .when('/home', {
-            templateUrl: './views/home.html'
+            templateUrl: './views/home.html',
+            controller: 'homeController'
         })
         .when('/tasks', {
             templateUrl: './views/tasks.html',

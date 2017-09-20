@@ -6,9 +6,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
 const path = require('path');
+const moment = require('moment');
 
 var {mongoose} = require('./db/mongoose');
-var {Todo} = require('./models/todo');
+var {Task} = require('./models/task');
 var {User} = require('./models/user');
 var {authenticate} = require('./middleware/authenticate');
 
@@ -23,69 +24,69 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/frontend/views/index.html');
 });
 
-app.post('/todos', authenticate, (req, res) => {
-  console.log("Todo recieved on server: " + req.body.dateTime)
-  let todo = new Todo({
+app.post('/tasks', authenticate, (req, res) => {
+  console.log("Task recieved on server: " + req.body.dateTime)
+  let task = new Task({
     text: req.body.text,
     _creator: req.user._id,
     dateTime: req.body.dateTime
   });
 
-  todo.save().then((doc) =>{
+  task.save().then((doc) =>{
     res.send(doc);
   }, (e) => {
     res.status(400).send(e);
   });
 });
 
-app.get('/todos', authenticate, (req, res) => {
-  Todo.find({
+app.get('/tasks', authenticate, (req, res) => {
+  Task.find({
     _creator: req.user._id
-  }).then((todos) => {
-    res.send({todos});
+  }).then((tasks) => {
+    res.send({tasks});
   }, (e) => {
     res.status(400).send(e);
   });
 });
 
-app.get('/todos/:id', authenticate, (req, res) => {
+app.get('/tasks/:id', authenticate, (req, res) => {
   let id = req.params.id;
 
   if(!ObjectID.isValid(id)){
     res.status(404).send();
     return console.log('Id is not valid');
   }
-  Todo.findOne({
+  Task.findOne({
     _id: id,
     _creator: req.user._id
-  }).then((todo) => {
-    if(!todo){
+  }).then((task) => {
+    if(!task){
       return res.status(404).send();
     }
-    res.status(200).send({todo});
+    res.status(200).send({task});
   }, (e) => res.status(400).send());
 });
 
-app.delete('/todos/:id', authenticate, (req,res) => {
+app.delete('/tasks/:id', authenticate, (req,res) => {
   let id = req.params.id;
 
   if(!ObjectID.isValid(id)){
     res.status(404).send();
     return console.log('Id is not valid');
   }
-  Todo.findOneAndRemove({
+  Task.findOneAndRemove({
     _id: id,
     _creator: req.user._id
-  }).then((todo) => {
-    if(!todo){
+  }).then((task) => {
+    if(!task){
        return res.status(404).send();
     }
-    res.status(200).send({todo});
+    res.status(200).send({task});
   }, (e) => res.status(400).send());
 
 });
 
-app.patch('/todos/:id', authenticate,  (req, res) => {
+app.patch('/tasks/:id', authenticate,  (req, res) => {
   var id = req.params.id;
   var body = _.pick(req.body, ['text', 'completed', 'dateTime']);
 
@@ -100,16 +101,38 @@ app.patch('/todos/:id', authenticate,  (req, res) => {
     body.completedAt = null;
   }
 
-  Todo.findOneAndUpdate({_id: id, _creator: req.user._id}, {$set: body}, {new: true}).then((todo)=> {
-    if(!todo){
+  Task.findOneAndUpdate({_id: id, _creator: req.user._id}, {$set: body}, {new: true}).then((task)=> {
+    if(!task){
       return res.status(404).send();
     }
 
-    res.send({todo});
+    res.send({task});
   }).catch((e)=>{
     res.status(400).send();
   });
 });
+
+
+//Find tasks by date
+app.post('/tasks/byDate', authenticate, (req, res) => {
+  console.log(req.body)
+  let date = req.body.date;
+  var today = moment(date).startOf('day')
+  var tomorrow = moment(today).add(1, 'days')
+  Task.find({
+    _creator: req.user._id,
+    dateTime: {
+      $gte: today.toDate(),
+      $lt: tomorrow.toDate()
+    }
+
+  }).then((tasks) => {
+    res.send({tasks});
+  }, (e) => {
+    res.status(400).send(e);
+  });
+});
+
 
 //POST /users
 app.post('/users', (req, res) => {

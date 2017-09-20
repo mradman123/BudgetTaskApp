@@ -1,7 +1,7 @@
 const {ObjectID} = require('mongodb');
 
 const {mongoose} = require('./../server/db/mongoose');
-const {Todo} = require('./../server/models/todo');
+const {Task} = require('./../server/models/task');
 const {User} = require('./../server/models/user')
 
 // var id = '58e76e6989f968bc1f0c11ff';
@@ -10,23 +10,23 @@ const {User} = require('./../server/models/user')
 //   console.log('ID not valid');
 // }
 //
-// Todo.find({
+// Task.find({
 //   _id: id
 // }).then((todos) => {
-//   console.log('Todos', todos);
+//   console.log('Tasks', todos);
 // });
 //
-// Todo.findOne({
+// Task.findOne({
 //   _id: id
-// }).then((todo) => {
-//   console.log('Todo', todo);
+// }).then((task) => {
+//   console.log('Task', task);
 // });
 //
-// Todo.findById(id).then((todo) => {
-//   if(!todo){
+// Task.findById(id).then((task) => {
+//   if(!task){
 //     return console.log('Id not found');
 //   }
-//   console.log('Todo by id', todo);
+//   console.log('Task by id', task);
 // }).catch((e) => console.log(e));
 
 var userId = '58e692b3453a772817a3e2a2';

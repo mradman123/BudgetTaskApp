@@ -4,7 +4,7 @@ app.service('getData', ['$http', function($http){
 
         return $http({
             method: 'GET',
-            url: '/todos',
+            url: '/tasks',
             headers: {'x-auth': JSON.parse(localStorage.getItem('token'))}
         }).then(function successCallback(response) {
             localStorage.setItem('tasks', JSON.stringify(response.data));
