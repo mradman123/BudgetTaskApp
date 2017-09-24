@@ -7,7 +7,9 @@ mongoose.Promise = global.Promise;
 // };
 
 //Use for production
-mongoose.connect(process.env.MONGODB_URI);
+//mongoose.connect(process.env.MONGODB_URI);
+
+mongoose.connect("mongodb://mradman123:123456@ds157833.mlab.com:57833/budget_task_app");
 
 
 //Use for local development

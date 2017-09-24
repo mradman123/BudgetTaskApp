@@ -1,13 +1,12 @@
 app.controller('tasksController', ['$scope', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', 'mdcDateTimeDialog', 'addTask', 'updateTask', 'deleteTask', function ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, mdcDateTimeDialog, addTask, updateTask, deleteTask) {
 
     function completeTask(id) {
-        let previous = {};
-        angular.copy(vm.tasks[id], previous);
         vm.tasks[id].completed = !vm.tasks[id].completed;
+        vm.tasks[id].dateTime = moment(vm.tasks[id].dateTime, 'DD-MM-YYYY hh:mm a').toDate();
         updateTask(vm.tasks[id]).then(function (data) {
             vm.dtInstance.reloadData();
         }).catch(function (e) {
-            vm.tasks[id] = previous;
+            //vm.tasks[id] = previous;
             vm.dtInstance.reloadData();
         });
 
@@ -16,6 +15,7 @@ app.controller('tasksController', ['$scope', '$compile', 'DTOptionsBuilder', 'DT
     function removeTask(id) {
         deleteTask(vm.tasks[id]).then(function (data) {
             vm.dtInstance.reloadData();
+            $scope.task = {};
         });
     }
 
@@ -103,13 +103,15 @@ app.controller('tasksController', ['$scope', '$compile', 'DTOptionsBuilder', 'DT
         if($scope.new){
             addTask($scope.task).then(function(response){
                 vm.dtInstance.reloadData();
+            }).catch(function (e) {
+                console.log(e)
             });
         }
         else{
             updateTask($scope.task).then(function (data) {
                 vm.dtInstance.reloadData();
             }).catch(function (e) {
-                //vm.tasks[id] = previous;
+                console.log(e)
             });
         }
         
@@ -135,7 +137,8 @@ app.controller('tasksController', ['$scope', '$compile', 'DTOptionsBuilder', 'DT
             }
         })
         .withPaginationType('full_numbers')
-        .withOption('createdRow', createdRow);
+        .withOption('createdRow', createdRow)
+        .withBootstrap();
 
     vm.dtColumns = [
         DTColumnBuilder.newColumn('text').withTitle('Task'),
@@ -149,6 +152,32 @@ app.controller('tasksController', ['$scope', '$compile', 'DTOptionsBuilder', 'DT
     //Date picker
     this.myDate = new Date();
     vm.isOpen = false;
+
+
+    vm.newReload = function() {
+        vm.dtOptions = DTOptionsBuilder
+        .newOptions().
+        withOption('ajax', {
+            dataType: 'json',
+            type: 'POST',
+            url: '/tasks/ByDate',
+            data: {date: Date.now},
+            headers: { 'x-auth': JSON.parse(localStorage.getItem('token')) },
+            dataSrc: function (data) {
+
+                let i = 0;
+                data.tasks = data.tasks.map(function(el){
+                    el.dateTime = moment(el.dateTime).format('DD-MM-YYYY hh:mm a');
+                    el.id = i;
+                    i++;
+                    return el;
+                });
+                return data.tasks;
+            }
+        })
+
+        vm.dtInstance.reloadData();
+    }
 
 
 }]);

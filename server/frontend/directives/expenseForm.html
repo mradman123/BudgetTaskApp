@@ -1,0 +1,37 @@
+<form ng-if="selected" name="expenseForm" ng-submit="submitExpenseForm(expenseForm.$valid)" novalidate>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <label>Text</label>
+      <input ng-model="expense.text">
+    </md-input-container>
+
+    <md-input-container>
+      <label>Amount</label>
+      <input ng-model="expense.amount">
+    </md-input-container>
+
+    <md-input-container>
+        <md-select ng-model="expense.category" placeholder="Category">
+            <md-option value="Bills">Bills</md-option>
+            <md-option value="Food">Food</md-option>
+            <md-option value="Entertainment">Entertainment</md-option>
+            <md-option value="Accommodation">Accommodation</md-option>
+            <md-option value="Transportation">Transportation</md-option>
+            <md-option value="Memberships">Memberships</md-option>
+            <md-option value="Debt">Debt</md-option>
+            <md-option value="Other">Other</md-option>         
+          </md-select>
+      </md-input-container>
+
+      <md-input-container>
+          <md-datepicker ng-model="expense.start" md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+        </md-input-container>
+      
+      
+
+  </div>
+ 
+  <div layout-gt-xs="row"></div>
+  <md-button type="submit" class="md-raised md-primary">Submit</md-button>
+  </div>
+</form>

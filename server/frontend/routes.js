@@ -21,6 +21,17 @@ app.config(function ($routeProvider){
             controller: 'tasksController',
             controllerAs: 'tasksController'
         })
+        .when('/expenses', {
+            templateUrl: './views/expenses.html',
+            controller: 'expensesController',
+            controllerAs: 'expensesController'
+        })
+        .when('/recurringExpenses', {
+            templateUrl: './views/recurringExpenses.html',
+            controller: 'rExpensesController',
+            controllerAs: 'rExpensesController'
+        })
+
 
         .otherwise({ redirectTo: '/' });
 });

@@ -9,7 +9,7 @@ app.service('updateTask', ['$http', function($http){
             data: task
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            console.log(response.data);
+
             return response.data;
 
         }, function errorCallback(response) {
@@ -32,7 +32,6 @@ app.service('deleteTask', ['$http', function($http){
             data: task
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            console.log(response.data);
             return response.data;
 
         }, function errorCallback(response) {
@@ -54,7 +53,7 @@ app.service('addTask', ['$http', function($http){
             data: task
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            console.log(response.data);
+
             return response.data;
 
         }, function errorCallback(response) {
@@ -76,7 +75,6 @@ app.service('getTasksByDate', ['$http', function($http){
             data: {date: date}
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            console.log(response.data);
             return response.data;
 
         }, function errorCallback(response) {

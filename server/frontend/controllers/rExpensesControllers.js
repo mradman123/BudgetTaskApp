@@ -1,15 +1,16 @@
-app.controller('expensesController', ['$scope', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', 'mdcDateTimeDialog', 'addExpense', 'updateExpense', 'deleteExpense', function ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, mdcDateTimeDialog, addExpense, updateExpense, deleteExpense) {
+app.controller('rExpensesController', ['$scope', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', 'mdcDateTimeDialog', 'addExpense', 'updateExpense', 'deleteExpense', function ($scope, $compile, DTOptionsBuilder, DTColumnBuilder, mdcDateTimeDialog, addExpense, updateExpense, deleteExpense) {
 
 
     function removeExpense(id) {
+
         deleteExpense(vm.expenses[id]).then(function (data) {
             vm.dtInstance.reloadData();
         });
     }
 
     function edit(id) {
-
         vm.expenses[id].start = moment(vm.expenses[id].start, 'DD-MM-YYYY').toDate();
+        vm.expenses[id].end = moment(vm.expenses[id].end, 'DD-MM-YYYY').toDate();
         $scope.new = false;
         $scope.expense = vm.expenses[id]
         $scope.selected = vm.expenses[id];
@@ -29,10 +30,10 @@ app.controller('expensesController', ['$scope', '$compile', 'DTOptionsBuilder', 
     function actionsHtml(data, type, full, meta) {
         vm.expenses[data.id] = data;
 
-        return '<button class="btn btn-warning" ng-click="expensesController.edit(' + data.id + ')">' +
+        return '<button class="btn btn-warning" ng-click="rExpensesController.edit(' + data.id + ')">' +
             '   <span class="glyphicon glyphicon-edit"></span>' +
             '</button>&nbsp;' +
-            '<button class="btn btn-danger" ng-click="expensesController.removeExpense(' + data.id + ')">' +
+            '<button class="btn btn-danger" ng-click="rExpensesController.removeExpense(' + data.id + ')">' +
             '   <span class="glyphicon glyphicon-trash"></i>' +
             '</button>';
     }
@@ -70,7 +71,8 @@ app.controller('expensesController', ['$scope', '$compile', 'DTOptionsBuilder', 
     $scope.new = true;
     $scope.selected = false;
     $scope.submitExpenseForm = function (isValid) {
-        $scope.expense.end = $scope.expense.start;
+        console.log("Submit")
+        $scope.expense.recurring = true;
         if ($scope.new) {
             addExpense($scope.expense).then(function (response) {
                 vm.dtInstance.reloadData();
@@ -91,13 +93,14 @@ app.controller('expensesController', ['$scope', '$compile', 'DTOptionsBuilder', 
         .newOptions().
         withOption('ajax', {
             dataType: "json",
-            url: '/expenses',
+            url: '/recurringExpenses',
             headers: { 'x-auth': JSON.parse(localStorage.getItem('token')) },
             dataSrc: function (data) {
 
                 let i = 0;
                 data.expenses = data.expenses.map(function (el) {
                     el.start = moment(el.start).format('DD-MM-YYYY');
+                    el.end = moment(el.end).format('DD-MM-YYYY');
                     el.id = i;
                     i++;
                     return el;
@@ -108,11 +111,13 @@ app.controller('expensesController', ['$scope', '$compile', 'DTOptionsBuilder', 
         .withPaginationType('full_numbers')
         .withOption('createdRow', createdRow)
         .withBootstrap();
+
     vm.dtColumns = [
         DTColumnBuilder.newColumn('text').withTitle('Expense'),
         DTColumnBuilder.newColumn('amount').withTitle('Amount'),
         DTColumnBuilder.newColumn('category').withTitle('Category'),
-        DTColumnBuilder.newColumn('start').withTitle('Date'),
+        DTColumnBuilder.newColumn('start').withTitle('Start date'),
+        DTColumnBuilder.newColumn('end').withTitle('End date'),
         DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];

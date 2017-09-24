@@ -1,0 +1,13 @@
+.navBardemoBasicUsage md-content .ext-content {
+    padding: 50px;
+    margin: 20px;
+    background-color: #FFF2E0; 
+}
+.picture {
+    background-image: url("https://images.unsplash.com/13/unsplash_523ae1f5502d6_1.JPG");
+    background-size: cover;
+    background-color: #cccccc;
+}
+.plain{
+    background-color: white;
+}

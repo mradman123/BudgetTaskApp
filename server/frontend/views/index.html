@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <!-- Angular datetimepicker style sheet -->
     <link rel="stylesheet" href=".././css/material-datetimepicker.min.css">
+    <!-- Custom style sheet -->
+    <link rel="stylesheet" href=".././css/custom.css">
+    <!-- MAterial icons library -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         html,
         body,
@@ -30,7 +34,9 @@
     crossorigin="anonymous"></script>
     <script type="text/javascript" src=".././scripts/datatables.min.js"></script>
     <!-- moment library -->
-    <script src=".././scripts/moment.min.js"></script>       
+    <script src=".././scripts/moment.min.js"></script>
+    <!-- Angular charts Library -->
+    <script src=".././scripts/Chart.min.js"></script>       
     <!-- load angular via CDN -->
     <script src="//code.angularjs.org/1.6.4/angular.min.js"></script>
     <script src="//code.angularjs.org/1.6.4/angular-route.min.js"></script>
@@ -43,7 +49,9 @@
     <!-- Angular Material Library -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <!-- Angular datetimepicker Library -->
-    <script src=".././scripts/angular-material-datetimepicker.min.js"></script
+    <script src=".././scripts/angular-material-datetimepicker.min.js"></script>
+    <!-- Angular charts Library -->
+     <script src=".././scripts/angular-chart.min.js"></script>
     <!-- app scripts -->
     <script src=".././app.js"></script>
     <script src=".././routes.js"></script>
@@ -57,12 +65,15 @@
     <script src=".././controllers/tasksControllers.js"></script>
     <script src=".././controllers/homeControllers.js"></script>
     <script src=".././controllers/expensesControllers.js"></script>
+    <script src=".././controllers/rExpensesControllers.js"></script>
     <!-- DIRECTIVES -->
     <script src=".././directives.js"></script>
     <script src=".././directives/taskDirective.js"></script>
+    <script src=".././directives/expenseDirective.js"></script>
+    <script src=".././directives/rExpenseDirective.js"></script>
 </head>
 
-<body ng-view>
+<body ng-class="{'picture' : bodyBackground, 'plain': !bodyBackground}" ng-view>
 
 
 

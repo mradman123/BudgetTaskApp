@@ -8,20 +8,12 @@
   <div layout-gt-xs="row">
     <md-input-container flex-gt-md="30">
       <label>Date and time:</label>
-     <!--  <input mdc-datetime-picker date="false" time="true" type="text" id="time" short-time="true" show-todays-date placeholder="Time"
-        min-date="minDate" format="hh:mm a" ng-change="vm.saveChange()" ng-model="task.time"> -->
-      
         <input mdc-datetime-picker="" date="true" time="true" type="text" id="time2"
          min-date="minDate" format="DD-MM-YYYY hh:mm a" ng-model="task.dateTime" class=" md-input"
         readonly="readonly">
 
       </md-input-container>
   </div>
- <!--  <div layout-gt-xs="row">
-    <div flex-gt-xs>
-      <md-datepicker ng-model="task.date" md-placeholder="Enter date" md-open-on-focus></md-datepicker>
-    </div>
-  </div> -->
   <div layout-gt-xs="row"></div>
   <md-button type="submit" class="md-raised md-primary">Submit</md-button>
   </div>
