@@ -75,7 +75,11 @@ app.service('getTasksByDate', ['$http', function($http){
             data: {date: date}
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            return response.data;
+            console.log(response.data.tasks)
+            return response.data.tasks.map(function(el){
+                el.time = moment(el.dateTime).format('hh:mm a');
+                return el;
+            });
 
         }, function errorCallback(response) {
             //$scope.showAlert = true;

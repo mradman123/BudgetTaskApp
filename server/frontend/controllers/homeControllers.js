@@ -20,20 +20,20 @@ app.controller('homeController', ['$scope', 'updateTask', 'getTasksByDate', 'get
 
     getTasksByDate(today).then((response) => {
 
-        $scope.todaysTasks = response.tasks;
+        $scope.todaysTasks = response;
 
 
     });
 
     getTasksByDate(tomorrow).then((response) => {
 
-        $scope.tomorrowsTasks = response.tasks;
+        $scope.tomorrowsTasks = response;
  
     });
 
     getTasksByDate(yesterday).then((response) => {
         
-       $scope.yesterdaysTasks = response.tasks;
+       $scope.yesterdaysTasks = response;
          
     });
 

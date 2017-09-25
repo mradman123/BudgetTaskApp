@@ -1,6 +1,6 @@
 <md-list ng-cloak>
           <md-list-item ng-repeat="task in tasks">
-            <p> {{ task.text }} </p>
+            <p> {{ task.text }} - {{task.time}} </p>
             <md-checkbox class="md-secondary" ng-model="task.completed" ng-click="completeTask({task})"></md-checkbox>
             <md-divider></md-divider>
         </md-list-item>       

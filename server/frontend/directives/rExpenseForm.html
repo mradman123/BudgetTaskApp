@@ -7,7 +7,7 @@
 
     <md-input-container>
       <label>Amount</label>
-      <input ng-model="expense.amount">
+      <input type="number" ng-model="expense.amount">
     </md-input-container>
 
     <md-input-container>
@@ -29,7 +29,8 @@
         <md-datepicker ng-model="expense.start" md-placeholder="Start date" md-open-on-focus></md-datepicker>
       </md-input-container>
       <md-input-container>
-        <md-datepicker ng-model="expense.end" md-placeholder="End date" md-open-on-focus></md-datepicker>
+        <md-datepicker ng-change="datesCompare()" ng-model="expense.end" md-placeholder="End date" md-open-on-focus></md-datepicker>
+        <p ng-show="showErrorMessage && !expense.start.$pristine" class="help-block">{{dateErrorMessage}}</p>
       </md-input-container>
     </div>
     <div layout-gt-xs="row"></div>

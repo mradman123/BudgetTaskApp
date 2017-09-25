@@ -31,29 +31,13 @@
   <div layout="row" layout-margin>
     <md-toolbar class="md-theme-light">
       <h2 class="md-toolbar-tools">
-        <span>Tasks:</span>
+        <span>Today's tasks:</span>
       </h2>
 
-      <md-content class="md-padding">
+    
         <div ng-cloak>
-          <md-content>
-            <md-tabs md-dynamic-height md-border-bottom>
-              <md-tab label="Today">
-                <md-content class="md-padding">
-                  <tasks-list tasks="todaysTasks" complete-task="completeTask(task)"></tasks-list>
-                </md-content>
-              </md-tab>
-              <md-tab label="Tomorrow">
-                <md-content class="md-padding">
-                  <tasks-list tasks="tomorrowsTasks" complete-task="completeTask(task)"></tasks-list>
-                </md-content>
-              </md-tab>
-              <md-tab label="Yesterday">
-                <md-content class="md-padding">
-                    <tasks-list tasks="yesterdaysTasks" complete-task="completeTask(task)"></tasks-list>
-                </md-content>
-              </md-tab>
-            </md-tabs>
+          <md-content class="tasks-container" flex class="md-padding">
+            <tasks-list tasks="todaysTasks" complete-task="completeTask(task)"></tasks-list>
           </md-content>
         </div>
     </md-toolbar>
@@ -61,11 +45,24 @@
 
     <md-toolbar class="md-theme-light">
       <h2 class="md-toolbar-tools">
-        <span>Expenses:</span>
+        <span>Tasks:</span>
       </h2>
-      <md-content class="md-padding">
-        <h1>Total monthly expenses: {{monthlyAmount}}</h1>
-      </md-content>
+      <div ng-cloak>
+        <md-content class="tasks-container">
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Tomorrow">
+              <md-content class="md-padding">
+                <tasks-list tasks="tomorrowsTasks" complete-task="completeTask(task)"></tasks-list>
+              </md-content>
+            </md-tab>
+            <md-tab label="Yesterday">
+              <md-content class="md-padding">
+                  <tasks-list tasks="yesterdaysTasks" complete-task="completeTask(task)"></tasks-list>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
      
     </md-toolbar>
   </div>
@@ -73,7 +70,7 @@
   <div layout="row" layout-margin>
     <md-toolbar class="md-theme-light">
       <h2 class="md-toolbar-tools">
-        <span>Monthly expenses by category:</span>
+        <span>Monthly expenses by category: {{monthlyAmount}} Total</span>
       </h2>
       <md-content class="md-padding">
         <canvas id="doughnut" class="chart chart-doughnut" chart-data="monthlyChartData" chart-labels="monthlyChartLabels">

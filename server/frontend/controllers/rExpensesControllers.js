@@ -122,7 +122,21 @@ app.controller('rExpensesController', ['$scope', '$compile', 'DTOptionsBuilder',
             .renderWith(actionsHtml)
     ];
 
+    //Dates error message
+    $scope.dateErrorMessage = '';
+    $scope.showErrorMessage = false;
+    $scope.datesCompare = function() {
+        let start = moment($scope.expense.start).year();
+        let end = moment($scope.expense.end).year()
 
+        if(start != end){
+            $scope.showErrorMessage = true;
+            $scope.dateErrorMessage = 'You must choose the same year!';
+        }
+
+        console.log(start + " " + end)
+        //if(expense.start.year())
+    }
 
     //Date picker
     this.myDate = new Date();
