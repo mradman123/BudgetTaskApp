@@ -25,7 +25,7 @@ app.controller('loginController', ['$scope', '$http', '$location', 'userStorage'
     };
 }]);
 
-app.controller('registerController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+app.controller('registerController', ['$scope', '$http', '$location', 'userStorage', function ($scope, $http, $location, userStorage) {
     $scope.email = '';
     $scope.password = '';
     $scope.rPassword = '';

@@ -71,7 +71,7 @@ app.controller('rExpensesController', ['$scope', '$compile', 'DTOptionsBuilder',
     $scope.new = true;
     $scope.selected = false;
     $scope.submitExpenseForm = function (isValid) {
-        console.log("Submit")
+
         $scope.expense.recurring = true;
         if ($scope.new) {
             addExpense($scope.expense).then(function (response) {
@@ -88,7 +88,6 @@ app.controller('rExpensesController', ['$scope', '$compile', 'DTOptionsBuilder',
 
     };
 
-    //console.log(data.todos)
     vm.dtOptions = DTOptionsBuilder
         .newOptions().
         withOption('ajax', {
@@ -134,8 +133,7 @@ app.controller('rExpensesController', ['$scope', '$compile', 'DTOptionsBuilder',
             $scope.dateErrorMessage = 'You must choose the same year!';
         }
 
-        console.log(start + " " + end)
-        //if(expense.start.year())
+
     }
 
     //Date picker

@@ -9,7 +9,7 @@ app.service('updateExpense', ['$http', function($http){
             data: expense
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            console.log(response.data);
+
             return response.data;
 
         }, function errorCallback(response) {
@@ -32,7 +32,7 @@ app.service('deleteExpense', ['$http', function($http){
             data: expense
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            console.log(response.data);
+
             return response.data;
 
         }, function errorCallback(response) {
@@ -54,7 +54,7 @@ app.service('addExpense', ['$http', function($http){
             data: expense
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            console.log(response.data);
+
             return response.data;
 
         }, function errorCallback(response) {
@@ -76,7 +76,7 @@ app.service('getExpensesByDate', ['$http', function($http){
             data: {date: date}
         }).then(function successCallback(response) {
             //localStorage.setItem('tasks', JSON.stringify(response.data));
-            console.log(response.data);
+
             return response.data;
 
         }, function errorCallback(response) {

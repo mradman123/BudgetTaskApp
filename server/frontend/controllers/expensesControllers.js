@@ -86,7 +86,7 @@ app.controller('expensesController', ['$scope', '$compile', 'DTOptionsBuilder', 
 
     };
 
-    //console.log(data.todos)
+
     vm.dtOptions = DTOptionsBuilder
         .newOptions().
         withOption('ajax', {
